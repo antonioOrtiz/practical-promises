@@ -87,7 +87,7 @@ function problemB() {
     promisifiedReadFile('poem-one/stanza-03.txt').then(function successHandler1(result) {
         // use the value inside this callback
         console.log('stanza-03 is done!!!');
-        blue(result); // woah, returning something async?
+        blue(result); // woah, returning something async? //
     });
 
 }
