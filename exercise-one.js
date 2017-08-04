@@ -136,16 +136,24 @@ function problemD() {
      */
 
     // callback version
-    readFile('poem-one/wrong-file-name.txt', function(err, stanza4) {
-        console.log('-- D. callback version (stanza four) --');
-        if (err) magenta(err);
-        else blue(stanza4);
-    });
+    // readFile('poem-one/wrong-file-name.txt', function(err, stanza4) {
+    //     console.log('-- D. callback version (stanza four) --');
+    //     if (err) magenta(err);
+    //     else blue(stanza4);
+    // });
 
     // promise version
     // ???
+    promisifiedReadFile('poem-one/wrong-file-name.txt')
+        .then(function successHandler1(stanza4) {
+           console.log('-- D. callback version (stanza four) --');
+           blue(stanza4);
+        }).catch(function errorHandler(err){
+           console.log('-- Promise version (stanza four) --');
+           magenta(err);
+        });
 
-}
+ }
 
 function problemE() {
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -155,20 +163,35 @@ function problemE() {
      *
      */
 
-    // callback version
-    readFile('poem-one/stanza-03.txt', function(err, stanza3) {
-        console.log('-- E. callback version (stanza three) --');
-        if (err) return magenta(err);
-        blue(stanza3);
-        readFile('poem-one/wrong-file-name.txt', function(err2, stanza4) {
-            console.log('-- E. callback version (stanza four) --');
-            if (err2) return magenta(err2);
-            blue(stanza4);
-        });
-    });
+    //callback version
+    // readFile('poem-one/stanza-03.txt', function(err, stanza3) {
+    //     console.log('-- E. callback version (stanza three) --');
+    //     if (err) return magenta(err);
+    //     blue(stanza3);
+    //     readFile('poem-one/wrong-file-name.txt', function(err2, stanza4) {
+    //         console.log('-- E. callback version (stanza four) --');
+    //         if (err2) return magenta(err2);
+    //         blue(stanza4);
+    //     });
+    // });
 
     // promise version
     // ???
+
+        promisifiedReadFile('poem-one/stanza-03.txt')
+        .then(function successHandler1(stanza3) {
+            console.log('stanza-03 is done!!!');
+            blue(stanza3);
+            return promisifiedReadFile('poem-one/wrong-file-name.txt')
+        })
+        .then(function successHandler1(stanza4) {
+            console.log('stanza-04 is done!!!');
+            blue(stanza4);
+        })
+        .catch(function errorHandler(err){
+           console.log('-- Promise version (stanza four) --');
+           magenta(err);
+        });
 
 }
 
